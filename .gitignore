@@ -1,0 +1,10 @@
+# Exclude large archive files
+*.tar
+*.tar.gz
+*.zip
+
+# OS files
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+.DS_Store

@@ -1,0 +1,64 @@
+/* css/literature.css */
+.literature-hero {
+    background: linear-gradient(180deg, #fbf6ef 0%, #f4ede4 100%);
+    color: #2d241c;
+}
+.literature-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.8rem 1.8rem;
+    background: #2d241c;
+    color: #fff;
+    border-radius: 999px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    margin-bottom: 1rem;
+}
+.literature-title {
+    font-family: 'Amiri', serif;
+    font-size: 3rem;
+    color: #2d241c;
+    margin-bottom: 0.75rem;
+}
+.literature-lead {
+    max-width: 760px;
+    margin: 0 auto;
+    color: #5f5044;
+    font-size: 1.05rem;
+    line-height: 1.95;
+}
+.literature-hero .title-divider {
+    margin-top: 1.5rem;
+    gap: 0.8rem;
+}
+.literature-hero .title-divider i {
+    color: #8b6f55;
+    font-size: 1.2rem;
+}
+.literature-card .hub-card-img {
+    min-height: 240px;
+}
+.literature-card .hub-card-overlay {
+    background: linear-gradient(to top, rgba(29, 26, 24, 0.86), rgba(29, 26, 24, 0.2));
+}
+.literature-card .hub-card-label {
+    font-size: 1.95rem;
+}
+.literature-card .hub-card-body {
+    padding: 1.5rem 1.3rem;
+}
+.literature-card .hub-card-btn {
+    background: #2d241c;
+}
+.literature-card:hover .hub-card-btn {
+    background: #7d5d45;
+}
+@media (max-width: 768px) {
+    .literature-title {
+        font-size: 2.3rem;
+    }
+    .literature-card .hub-card-img {
+        min-height: 220px;
+    }
+}
