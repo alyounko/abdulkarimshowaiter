@@ -134,3 +134,71 @@
 }
 .video-close:hover { opacity: 1; }
 @keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+
+@media (max-width: 991px) {
+    .interviews-title {
+        font-size: 2.3rem;
+    }
+    .interview-info {
+        padding: 1.5rem;
+    }
+    .interview-number {
+        font-size: 3rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .interviews-title {
+        font-size: 2rem;
+    }
+    .interviews-header {
+        padding: 3rem 0;
+    }
+    .interview-info {
+        padding: 1.25rem;
+    }
+    .interview-vid-title {
+        font-size: 1.3rem;
+    }
+    .interview-number {
+        font-size: 2.5rem;
+    }
+    .interview-desc {
+        font-size: 0.9rem;
+        line-height: 1.7;
+    }
+    .play-btn i {
+        font-size: 2rem;
+        width: 52px;
+        height: 52px;
+    }
+}
+
+@media (max-width: 576px) {
+    .interviews-title {
+        font-size: 1.7rem;
+    }
+    .interviews-subtitle {
+        font-size: 0.95rem;
+    }
+    .interview-info {
+        padding: 1rem;
+    }
+    .interview-vid-title {
+        font-size: 1.15rem;
+    }
+    .interview-number {
+        font-size: 2rem;
+    }
+    .interview-yt-btn {
+        padding: 0.4rem 1rem;
+        font-size: 0.85rem;
+    }
+    .video-overlay-inner {
+        max-width: 100%;
+    }
+    .video-close {
+        top: -36px;
+        font-size: 1.5rem;
+    }
+}

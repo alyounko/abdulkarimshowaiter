@@ -2,6 +2,33 @@
    ABOUT PAGE — css/about.css
    ===================================================== */
 
+.about-hero {
+    background: linear-gradient(135deg, var(--primary-color), #7a5a3a);
+    color: #fff;
+    position: relative;
+    overflow: hidden;
+}
+.about-hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url('../arabic-pattern.webp');
+    background-size: 200px;
+    opacity: 0.06;
+}
+.about-hero .title-divider span {
+    background: var(--secondary-color);
+}
+.about-hero i {
+    color: var(--secondary-color);
+}
+.about-hero h1 {
+    color: #fff;
+}
+.about-hero p {
+    color: rgba(255,255,255,0.7);
+}
+
 .about-wrapper {
     background-color: var(--bg-color);
     padding-bottom: 4rem;
@@ -87,5 +114,47 @@
     }
     .about-title, .about-subtitle {
         text-align: center !important;
+    }
+}
+
+@media (max-width: 768px) {
+    .about-wrapper .row {
+        --bs-gutter-x: 2rem;
+    }
+    .about-photo-wrap {
+        margin-top: 2rem;
+        margin-bottom: 2rem;
+    }
+    .about-photo {
+        max-width: 220px;
+    }
+    .about-title {
+        font-size: 2rem;
+        margin-bottom: 2rem;
+    }
+    .about-subtitle {
+        font-size: 1.4rem;
+    }
+    .about-info-list {
+        font-size: 1rem;
+        text-align: center;
+    }
+}
+
+@media (max-width: 576px) {
+    .about-wrapper .row {
+        --bs-gutter-x: 1rem;
+    }
+    .about-photo {
+        max-width: 180px;
+    }
+    .about-title {
+        font-size: 1.7rem;
+    }
+    .about-subtitle {
+        font-size: 1.2rem;
+    }
+    .about-bio {
+        font-size: 0.95rem;
     }
 }

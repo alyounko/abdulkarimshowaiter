@@ -5,7 +5,7 @@
 
 // Scroll-reveal animation for any card elements
 function initScrollReveal() {
-    const cards = document.querySelectorAll('.article-card, .letter-card, .hub-card, .interview-card, .artwork-card');
+    const cards = document.querySelectorAll('.article-card, .letter-card, .hub-card, .interview-card, .artwork-card, .book-card, .diwan-card, .about-wrapper, .privacy-panel, .contact-card, .poems-hub-wrapper');
     if (!cards.length) return;
 
     const observer = new IntersectionObserver((entries) => {
@@ -28,11 +28,28 @@ function initScrollReveal() {
 
 // Close mobile navbar when a link is clicked
 function initNavbarAutoClose() {
-    const collapse = document.querySelector('.navbar-collapse');
-    document.querySelectorAll('.navbar-nav .nav-link, .dropdown-item').forEach(link => {
-        link.addEventListener('click', () => {
-            if (collapse?.classList.contains('show')) {
-                document.querySelector('.navbar-toggler')?.click();
+    const collapseEl = document.querySelector('.navbar-collapse');
+    if (!collapseEl) return;
+
+    document.querySelectorAll('.navbar-nav .nav-link').forEach(link => {
+        link.addEventListener('click', (e) => {
+            if (link.classList.contains('dropdown-toggle')) return;
+            if (collapseEl.classList.contains('show')) {
+                const bsCollapse = bootstrap.Collapse.getInstance(collapseEl);
+                if (bsCollapse) {
+                    bsCollapse.hide();
+                }
+            }
+        });
+    });
+
+    document.querySelectorAll('.dropdown-menu .dropdown-item').forEach(item => {
+        item.addEventListener('click', () => {
+            if (collapseEl.classList.contains('show')) {
+                const bsCollapse = bootstrap.Collapse.getInstance(collapseEl);
+                if (bsCollapse) {
+                    bsCollapse.hide();
+                }
             }
         });
     });

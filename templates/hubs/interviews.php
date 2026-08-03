@@ -73,7 +73,7 @@ $videos = [
                         <!-- Thumbnail / Embed -->
                         <div class="col-12 col-md-5 <?php echo $isOdd ? 'order-md-2' : 'order-md-1'; ?>">
                             <div class="interview-thumb" data-video-id="<?php echo htmlspecialchars($v['id']); ?>">
-                                <img src="https://img.youtube.com/vi/<?php echo $v['id']; ?>/mqdefault.jpg"
+                                <img src="https://img.youtube.com/vi/<?php echo $v['id']; ?>/hqdefault.jpg"
                                      alt="<?php echo htmlspecialchars($v['title']); ?>"
                                      class="interview-thumb-img" loading="lazy">
                                 <button class="play-btn" aria-label="تشغيل الفيديو">
@@ -102,7 +102,7 @@ $videos = [
         </div>
 
         <div class="text-center mt-5">
-            <a href="index.php" class="btn btn-outline-secondary rounded-pill px-4">
+            <a href="index.php" class="btn btn-gold rounded-pill px-4">
                 <i class="fas fa-arrow-right ms-2"></i> العودة للرئيسية
             </a>
         </div>

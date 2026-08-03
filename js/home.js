@@ -2,9 +2,9 @@
  * home.js — Homepage article loader.
  * Handles dynamic "Load More" pagination via the api.php JSON endpoint.
  */
-
-let currentPage = 1;
-let isLoading   = false;
+(function() {
+var currentPage = 1;
+var isLoading   = false;
 
 function escapeHtml(text) {
     const div = document.createElement('div');
@@ -71,7 +71,9 @@ async function fetchArticles() {
     }
 }
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', function() {
     fetchArticles();
-    document.getElementById('load-more-btn')?.addEventListener('click', fetchArticles);
+    var btn = document.getElementById('load-more-btn');
+    if (btn) btn.addEventListener('click', fetchArticles);
 });
+})();

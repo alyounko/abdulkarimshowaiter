@@ -1,0 +1,212 @@
+/* =====================================================
+   BOOKSHELF — Shared card styles for Books & Diwans
+   ===================================================== */
+
+/* Card Container */
+.book-card, .diwan-card {
+    perspective: 800px;
+    margin-bottom: 1rem;
+    animation: shelfFadeIn 0.5s ease both;
+    animation-delay: var(--delay, 0s);
+}
+@keyframes shelfFadeIn {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Spine (left edge 3D effect) */
+.book-spine, .diwan-spine {
+    position: absolute;
+    top: 8px;
+    left: -6px;
+    width: 12px;
+    height: calc(100% - 16px);
+    background: linear-gradient(to right, #4a3425, #5c4033);
+    border-radius: 3px 0 0 3px;
+    transform: rotateY(-15deg);
+    transform-origin: right center;
+    z-index: 0;
+    box-shadow: -2px 2px 6px rgba(0,0,0,0.2);
+}
+
+/* Cover wrapper */
+.book-cover-wrap, .diwan-cover-wrap {
+    position: relative;
+    border-radius: 12px 12px 0 0;
+    overflow: hidden;
+    background: #f5f0e8;
+    border: 2px solid rgba(92, 64, 51, 0.15);
+    border-bottom: none;
+    aspect-ratio: 3 / 4;
+    box-shadow:
+        4px 4px 12px rgba(0,0,0,0.15),
+        0 0 0 1px rgba(0,0,0,0.05);
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+.book-card:hover .book-cover-wrap,
+.diwan-card:hover .diwan-cover-wrap {
+    transform: rotateY(-5deg) translateX(4px);
+    box-shadow:
+        8px 4px 20px rgba(0,0,0,0.25),
+        0 0 0 1px rgba(0,0,0,0.05);
+}
+
+/* Cover image */
+.book-cover-img, .diwan-cover-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.5s ease;
+}
+.book-cover-img picture, .book-cover-img img,
+.diwan-cover-img picture, .diwan-cover-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.book-card:hover .book-cover-img,
+.diwan-card:hover .diwan-cover-img {
+    transform: scale(1.03);
+}
+
+/* Shine effect on hover */
+.book-cover-shine, .diwan-cover-shine {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        105deg,
+        transparent 40%,
+        rgba(255,255,255,0.3) 45%,
+        rgba(255,255,255,0.1) 50%,
+        transparent 55%
+    );
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+}
+.book-card:hover .book-cover-shine,
+.diwan-card:hover .diwan-cover-shine {
+    opacity: 1;
+}
+
+/* Placeholder when no cover */
+.book-cover-placeholder, .diwan-cover-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #f5f0e8, #e8dfd2);
+    color: var(--primary-color);
+    font-size: 3rem;
+    opacity: 0.5;
+}
+
+/* Info section */
+.book-info, .diwan-info {
+    background: var(--surface-color);
+    border: 2px solid rgba(92, 64, 51, 0.15);
+    border-top: 1px solid rgba(92, 64, 51, 0.08);
+    border-radius: 0 0 12px 12px;
+    padding: 1.2rem 1rem 1.4rem;
+    text-align: center;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.08);
+    transition: box-shadow 0.3s ease;
+}
+.book-card:hover .book-info,
+.diwan-card:hover .diwan-info {
+    box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+}
+
+/* Title */
+.book-title, .diwan-title {
+    font-family: 'Amiri', serif;
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+    line-height: 1.5;
+    min-height: 2.5em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Action buttons */
+.book-actions, .diwan-actions {
+    display: flex;
+    gap: 0.6rem;
+    justify-content: center;
+}
+
+/* Read Online button */
+.btn-read-online {
+    background: linear-gradient(135deg, var(--secondary-color), #bfa033);
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    padding: 0.55rem 1.2rem;
+    font-family: 'Tajawal', sans-serif;
+    font-weight: 600;
+    font-size: 0.9rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    text-decoration: none;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    box-shadow: 0 3px 10px rgba(193, 155, 108, 0.3);
+}
+.btn-read-online:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 18px rgba(193, 155, 108, 0.45);
+    color: #fff;
+}
+.btn-read-online i {
+    font-size: 0.95rem;
+}
+
+/* Download button */
+.btn-download {
+    background: transparent;
+    color: var(--primary-color);
+    border: 2px solid var(--primary-color);
+    border-radius: 10px;
+    padding: 0.55rem 1.2rem;
+    font-family: 'Tajawal', sans-serif;
+    font-weight: 600;
+    font-size: 0.9rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    text-decoration: none;
+    transition: all 0.25s ease;
+}
+.btn-download:hover {
+    background: var(--primary-color);
+    color: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 14px rgba(92, 64, 51, 0.25);
+}
+.btn-download i {
+    font-size: 0.9rem;
+}
+
+/* ========================
+   Responsive
+   ======================== */
+@media (max-width: 768px) {
+    .book-actions, .diwan-actions {
+        flex-direction: column;
+    }
+    .book-actions .btn, .diwan-actions .btn {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 576px) {
+    .book-cover-wrap, .diwan-cover-wrap {
+        aspect-ratio: 3 / 3.5;
+    }
+}

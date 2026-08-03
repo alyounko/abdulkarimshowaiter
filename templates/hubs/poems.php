@@ -2,13 +2,16 @@
 // templates/hubs/poems.php
 // Expects: $pdo, $page_title
 ?>
+<div class="poems-hero text-center py-5 mb-4">
+    <div class="container py-4">
+        <div class="title-divider mx-auto mb-3"><span></span><i class="fas fa-feather-pointed"></i><span></span></div>
+        <h1 class="poems-main-title brand-font display-4">مختارات من الشعر العربي</h1>
+        <p class="poems-subtitle text-muted mt-3 fs-5">مختارات من الشعر العربي كما انتقاها د. عبد الكريم الشويطر</p>
+    </div>
+</div>
+
 <div class="container my-5">
     <div class="poems-hub-wrapper">
-        <div class="poems-hub-intro text-center mb-5">
-            <h1 class="poems-main-title">مختارات من الشعر العربي</h1>
-            <p class="poems-subtitle">مختارات من الشعر العربي كما انتقاها د. عبد الكريم الشويطر</p>
-            <div class="title-divider"><span></span><i class="fas fa-feather-alt"></i><span></span></div>
-        </div>
 
         <?php
         $stmt = $pdo->prepare(
@@ -35,7 +38,7 @@
         </div>
 
         <div class="text-center mt-5">
-            <a href="index.php" class="btn btn-outline-secondary rounded-pill px-4">
+            <a href="index.php" class="btn btn-gold rounded-pill px-4">
                 <i class="fas fa-arrow-right ms-2"></i> العودة للرئيسية
             </a>
         </div>

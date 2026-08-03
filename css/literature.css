@@ -54,11 +54,43 @@
 .literature-card:hover .hub-card-btn {
     background: #7d5d45;
 }
+@media (max-width: 991px) {
+    .literature-title {
+        font-size: 2.5rem;
+    }
+}
+
 @media (max-width: 768px) {
     .literature-title {
         font-size: 2.3rem;
     }
     .literature-card .hub-card-img {
         min-height: 220px;
+    }
+    .literature-badge {
+        padding: 0.6rem 1.4rem;
+        font-size: 0.9rem;
+    }
+    .literature-lead {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .literature-title {
+        font-size: 1.8rem;
+    }
+    .literature-card .hub-card-img {
+        min-height: 180px;
+    }
+    .literature-card .hub-card-label {
+        font-size: 1.5rem;
+    }
+    .literature-card .hub-card-body {
+        padding: 1rem;
+    }
+    .literature-badge {
+        padding: 0.5rem 1.2rem;
+        font-size: 0.85rem;
     }
 }

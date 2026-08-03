@@ -37,6 +37,9 @@ function format_arabic_date($date_string)
 // -----------------------------------------------------------------------
 function get_menu_pages($pdo)
 {
+    static $cache = null;
+    if ($cache !== null) return $cache;
+
     $main_slugs = [
         'about',            // نبذة عن المؤلف
         'literature-works', // الأعمال الأدبية
@@ -64,10 +67,22 @@ function get_menu_pages($pdo)
         if (isset($indexed[$s]))
             $sorted[] = $indexed[$s];
     }
+    $cache = $sorted;
     return $sorted;
 }
 
-// Fix image URLs — swap remote WordPress CDN URLs with local 2025/ folder paths
+// Generate <picture> element with WebP source and original fallback
+function picture($src, $alt = '', $class = '', $attrs = '') {
+    $webp = preg_replace('/\.(png|jpe?g)$/i', '.webp', $src);
+    $ext = strtolower(pathinfo($src, PATHINFO_EXTENSION));
+    $mime = $ext === 'jpg' || $ext === 'jpeg' ? 'image/jpeg' : 'image/' . $ext;
+    $classAttr = $class ? ' class="' . htmlspecialchars($class) . '"' : '';
+    return '<picture>'
+        . '<source srcset="' . htmlspecialchars($webp) . '" type="image/webp">'
+        . '<source srcset="' . htmlspecialchars($src) . '" type="' . $mime . '">'
+        . '<img src="' . htmlspecialchars($src) . '" alt="' . htmlspecialchars($alt) . '"' . $classAttr . ' ' . $attrs . '>'
+        . '</picture>';
+}
 function fix_content_images($html)
 {
     $html = preg_replace(
@@ -75,7 +90,44 @@ function fix_content_images($html)
         '$1',
         $html
     );
+    $html = preg_replace(
+        '/<img(?![^>]*\sloading=)/i',
+        '<img loading="lazy"',
+        $html
+    );
     return $html;
+}
+
+// Convert <img> src to <picture> with WebP source and fallback
+function fix_images_to_picture($html)
+{
+    return preg_replace_callback(
+        '/<img\s+([^>]*?)src=["\']([^"\']+)["\']([^>]*?)>/i',
+        function ($m) {
+            $before = $m[1];
+            $src = $m[2];
+            $after = $m[3];
+            
+            // Skip if already inside a <picture> or has srcset
+            if (stripos($before . $after, 'srcset') !== false) return $m[0];
+            
+            // Skip YouTube thumbnails (external)
+            if (strpos($src, 'img.youtube.com') !== false) return $m[0];
+            
+            // Skip data: URIs
+            if (strpos($src, 'data:') === 0) return $m[0];
+            
+            $webp = preg_replace('/\.(png|jpe?g)$/i', '.webp', $src);
+            $ext = strtolower(pathinfo($src, PATHINFO_EXTENSION));
+            $mime = ($ext === 'jpg' || $ext === 'jpeg') ? 'image/jpeg' : 'image/' . $ext;
+            
+            return '<picture>'
+                . '<source srcset="' . htmlspecialchars($webp) . '" type="image/webp">'
+                . '<source srcset="' . htmlspecialchars($src) . '" type="' . $mime . '">'
+                . '<img ' . $before . 'src="' . htmlspecialchars($src) . '"' . $after . '>';
+        },
+        $html
+    );
 }
 
 function fix_content_links($html)
@@ -174,6 +226,8 @@ function get_hub_type($slug)
         'about' => 'about',
         'contact-us' => 'contact',
         'privacy-policy' => 'privacy',
+        'books' => 'books',
+        'dawawin' => 'dawawin',
     ];
     return isset($hubs[$slug]) ? $hubs[$slug] : false;
 }
@@ -206,7 +260,7 @@ function render_poems_hub($pdo)
             <div class="intro-badge mb-3">مقدمة وإطلالة المختارات الشعرية</div>
             <h1 class="poems-main-title">مختارات من الشعر العربي</h1>
             <p class="poems-subtitle">مختارات من الشعر العربي كما انتقاها د. عبد الكريم الشويطر</p>
-            <div class="title-divider"><span></span><i class="fas fa-feather-alt"></i><span></span></div>
+            <div class="title-divider"><span></span><i class="fas fa-feather-pointed"></i><span></span></div>
         </div>
         <div class="row g-3 justify-content-center">
             <?php foreach ($letters as $i => $letter): ?>
@@ -229,10 +283,10 @@ function render_poems_hub($pdo)
 function render_literature_hub($pdo)
 {
     $sections = [
-        ['title' => 'المقالات', 'slug' => 'articles', 'img' => '2025/02/photo_2025-02-02_22-15-15-1.jpg', 'desc' => 'مجموعة من المقالات من قلم د. عبد الكريم الشويطر'],
-        ['title' => 'الدواوين', 'slug' => 'dawawin', 'img' => '2025/02/photo_2025-02-02_22-15-19-1.jpg', 'desc' => 'مجموعة من الدواوين من قلم د. عبد الكريم الشويطر'],
-        ['title' => 'الكتب', 'slug' => 'books', 'img' => '2025/02/photo_2025-02-02_22-15-22.jpg', 'desc' => 'مؤلفات الدكتور عبدالكريم الشويطر'],
-        ['title' => 'مختاراتي', 'slug' => 'poems', 'img' => '2025/02/photo_2025-02-02_22-15-19-1.jpg', 'desc' => 'مختارات من الشعر العربي'],
+        ['title' => 'المقالات', 'slug' => 'articles', 'img' => '2025/02/photo_2025-02-02_22-15-15-1.webp', 'desc' => 'مجموعة من المقالات من قلم د. عبد الكريم الشويطر'],
+        ['title' => 'الدواوين', 'slug' => 'dawawin', 'img' => '2025/02/photo_2025-02-02_22-15-19-1.webp', 'desc' => 'مجموعة من الدواوين من قلم د. عبد الكريم الشويطر'],
+        ['title' => 'الكتب', 'slug' => 'books', 'img' => '2025/02/photo_2025-02-02_22-15-22.webp', 'desc' => 'مؤلفات الدكتور عبدالكريم الشويطر'],
+        ['title' => 'مختاراتي', 'slug' => 'poems', 'img' => '2025/02/photo_2025-02-02_22-15-19-1.webp', 'desc' => 'مختارات من الشعر العربي'],
     ];
 
     ob_start();
@@ -246,7 +300,7 @@ function render_literature_hub($pdo)
             <?php foreach ($sections as $sec): ?>
                 <div class="col-12 col-sm-6 col-lg-3">
                     <a href="page.php?slug=<?php echo $sec['slug']; ?>" class="hub-card">
-                        <div class="hub-card-img" style="background-image:url('<?php echo $sec['img']; ?>')">
+                        <div class="hub-card-img bg-lazy" data-bg="<?php echo $sec['img']; ?>">
                             <div class="hub-card-overlay">
                                 <span class="hub-card-label"><?php echo $sec['title']; ?></span>
                             </div>

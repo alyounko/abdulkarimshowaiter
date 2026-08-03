@@ -48,9 +48,7 @@ $painting_num = 1;
             <div class="col-6 col-sm-4 col-md-3">
                 <div class="artwork-card" data-src="<?php echo htmlspecialchars($local_src); ?>" data-label="<?php echo htmlspecialchars($label); ?>">
                     <div class="artwork-img-wrap">
-                        <img src="<?php echo htmlspecialchars($local_src); ?>"
-                             alt="<?php echo htmlspecialchars($label); ?>"
-                             class="artwork-img" loading="lazy">
+                        <?php echo picture($local_src, $label, 'artwork-img', 'loading="lazy"'); ?>
                         <div class="artwork-overlay">
                             <i class="fas fa-search-plus"></i>
                         </div>
@@ -62,7 +60,7 @@ $painting_num = 1;
         </div>
 
         <div class="text-center mt-5">
-            <a href="index.php" class="btn btn-outline-secondary rounded-pill px-4">
+            <a href="index.php" class="btn btn-gold rounded-pill px-4">
                 <i class="fas fa-arrow-right ms-2"></i> العودة للرئيسية
             </a>
         </div>
@@ -76,6 +74,7 @@ $painting_num = 1;
     <div class="artwork-lightbox-inner">
         <img src="" id="lightbox-img" alt="">
         <p id="lightbox-label"></p>
+        <span id="lightbox-counter" class="lightbox-counter"></span>
         <button id="rotate-btn" class="lightbox-rotate-btn" title="تدوير"><i class="fas fa-sync-alt"></i></button>
     </div>
     <button class="artwork-lightbox-nav next" id="artwork-next"><i class="fas fa-chevron-left"></i></button>

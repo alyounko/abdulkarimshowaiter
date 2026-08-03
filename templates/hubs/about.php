@@ -3,7 +3,7 @@
 $author_name    = "د. عبد الكريم عبد الله الشويطر";
 $birth_date     = "١٩٥٠/٧/٢٤";
 $social_status  = "متزوج وأب لأربعة أبناء وثلاث بنات";
-$photo_src      = "2025/01/untitled-320-x-480-px-640-x-960-px.png";
+$photo_src      = "2025/01/untitled-320-x-480-px-640-x-960-px.webp";
 
 $bio_sections = [
     "تلقى علومه الأساسية في مدينة إب والثانوية في القاهرة وتعز. رُشح لدراسة العلوم الطبية إلى براغ جامعة تشارلس في عام ١٩٧٠ ضمن أوائل الطلبة.",
@@ -14,18 +14,23 @@ $bio_sections = [
 ?>
 
 <div class="about-wrapper">
+    <!-- About Hero -->
+    <div class="about-hero text-center py-5">
+        <div class="container py-4">
+            <div class="title-divider mx-auto mb-3"><span></span><i class="fas fa-user-pen"></i><span></span></div>
+            <h1 class="about-title brand-font display-4">نبذة عن الدكتور</h1>
+            <p class="text-muted mt-3 fs-5">السيرة الذاتية للدكتور عبد الكريم الشويطر</p>
+        </div>
+    </div>
+
     <div class="container py-5">
-        <!-- نبذة - Centered -->
-        <h1 class="about-title text-center">نبذة</h1>
 
         <!-- Photo + All Text - Same Level -->
         <div class="row align-items-start mt-4">
             <!-- Photo - Right -->
             <div class="col-lg-6 text-center mb-4 mb-lg-0 order-lg-2">
                 <div class="about-photo-wrap">
-                    <img src="<?php echo htmlspecialchars($photo_src); ?>"
-                         alt="<?php echo htmlspecialchars($author_name); ?>"
-                         class="about-photo shadow-lg">
+                    <?php echo picture($photo_src, $author_name, 'about-photo shadow-lg', 'loading="lazy"'); ?>
                 </div>
             </div>
 
@@ -59,7 +64,7 @@ $bio_sections = [
         </div>
 
         <div class="text-center mt-4">
-            <a href="index.php" class="btn btn-outline-secondary rounded-pill px-5 py-2">
+            <a href="index.php" class="btn btn-gold rounded-pill px-5 py-2">
                 <i class="fas fa-arrow-right ms-2"></i> العودة للرئيسية
             </a>
         </div>

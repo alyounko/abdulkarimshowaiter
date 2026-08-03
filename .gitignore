@@ -8,3 +8,14 @@ Thumbs.db
 ehthumbs.db
 Desktop.ini
 .DS_Store
+
+# Dev/test files
+test*.php
+delete_dupes.php
+update_*.php
+import.py
+*.txt
+*.xml
+*.md
+data/
+*.sqlite
