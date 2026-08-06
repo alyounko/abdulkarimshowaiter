@@ -70,7 +70,7 @@ if ($view_mode === 'mobile' || $view_mode === 'desktop') {
             <p class="lead fw-medium fs-3 text-primary-custom hero-typing-wrap">
                 <span id="heroTyping"></span><span class="typing-cursor">|</span>
             </p>
-            <p class="hero-subtext mt-3">بوابة شخصية مباشرة إلى عالم الدكتور عبد الكريم الشويطر — شعرٌ يهمس بالوجدان، وفنٌ يعانق الجمال، وأقلامٌ تُنير العقول.</p>
+            <p class="hero-subtext mt-3">بوابة شخصية مباشرة إلى عالم الدكتور عبد الكريم الشويطر</p>
             <a href="#about" class="btn btn-gold mt-4 rounded-pill px-4 py-2 fs-5 shadow smooth-scroll d-inline-flex align-items-center gap-2">
                 اكتشف المزيد <i class="fas fa-chevron-down slide-down-anim"></i>
             </a>
