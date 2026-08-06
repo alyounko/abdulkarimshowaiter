@@ -1,4 +1,6 @@
 <?php
+session_start();
+header('Content-Type: text/html; charset=UTF-8');
 require_once 'includes/db.php';
 require_once 'includes/functions.php';
 
@@ -12,11 +14,21 @@ if ($art_post_id) {
 }
 ?>
 <!DOCTYPE html>
-<?php $view_mode = isset($_GET['view']) ? $_GET['view'] : null; ?>
+<?php
+$view_mode = isset($_GET['view']) ? $_GET['view'] : null;
+if ($view_mode === 'mobile' || $view_mode === 'desktop') {
+    $_SESSION['view_mode'] = $view_mode;
+} elseif (isset($_GET['view']) && $_GET['view'] === 'natural') {
+    unset($_SESSION['view_mode']);
+    $view_mode = null;
+} elseif ($view_mode === null && isset($_SESSION['view_mode'])) {
+    $view_mode = $_SESSION['view_mode'];
+}
+?>
 <html lang="ar" dir="rtl" <?php if ($view_mode === 'mobile') echo 'class="view-mobile"'; elseif ($view_mode === 'desktop') echo 'class="view-desktop"'; ?>>
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <?php echo viewport_meta_tag($view_mode); ?>
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <title>موقع د.عبد الكريم الشويطر</title>
     <meta name="description" content="موقع الدكتور عبد الكريم الشويطر - طبيب وشاعر وفنان تشكيلي يمني. كتب، دواوين شعر، مقالات، ولوحات فنية.">
@@ -36,7 +48,7 @@ if ($art_post_id) {
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Tajawal:wght@400;500;700&display=swap">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.rtl.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="css/style.min.css?v=50">
+    <link rel="stylesheet" href="css/style.min.css?v=52">
 </head>
 <body class="home-page">
 
@@ -100,7 +112,7 @@ if ($art_post_id) {
             <div class="col-6 col-lg-3 reveal-up delay-1">
                 <div class="stat-item">
                     <div class="stat-icon"><i class="fas fa-pen-nib"></i></div>
-                    <div class="stat-number" data-target="30">0</div>
+                    <div class="stat-number" data-target="40">0</div>
                     <div class="stat-label">عاماً من الإبداع</div>
                 </div>
             </div>
@@ -145,7 +157,7 @@ if ($art_post_id) {
             <div class="col-md-6 col-lg-5 reveal-up delay-1">
                 <a href="page.php?slug=literature-works" class="hub-preview-card text-decoration-none d-block shadow-lg rounded-4 overflow-hidden position-relative group">
                     <div class="hub-img-wrap overflow-hidden position-relative">
-                        <?php echo picture('2025/02/photo_2025-02-02_22-15-22.jpg', 'الأدب', 'img-fluid w-100 hub-zoom', 'loading="lazy"'); ?>
+                        <?php echo picture('2025/02/5-1.webp', 'الأدب', 'img-fluid w-100 hub-zoom', 'loading="lazy"'); ?>
                         <div class="hub-overlay d-flex flex-column align-items-center justify-content-center">
                             <h3 class="brand-font text-white display-6 fw-bold" style="text-shadow: 2px 2px 8px rgba(0,0,0,0.8); letter-spacing: 1px;">الأدب</h3>
                         </div>
@@ -160,7 +172,7 @@ if ($art_post_id) {
             <div class="col-md-6 col-lg-5 reveal-up delay-2">
                 <a href="page.php?slug=art-works" class="hub-preview-card text-decoration-none d-block shadow-lg rounded-4 overflow-hidden position-relative group">
                     <div class="hub-img-wrap overflow-hidden position-relative">
-                        <?php echo picture('2025/01/untitled-design31.png', 'الفن التشكيلي', 'img-fluid w-100 hub-zoom', 'loading="lazy"'); ?>
+                        <?php echo picture('2025/01/untitled-design35.webp', 'الفن التشكيلي', 'img-fluid w-100 hub-zoom', 'loading="lazy"'); ?>
                         <div class="hub-overlay d-flex flex-column align-items-center justify-content-center">
                             <h3 class="brand-font text-white display-6 fw-bold" style="text-shadow: 2px 2px 8px rgba(0,0,0,0.8); letter-spacing: 1px;">الفن التشكيلي</h3>
                         </div>
