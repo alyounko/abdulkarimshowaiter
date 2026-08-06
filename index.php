@@ -172,7 +172,7 @@ if ($view_mode === 'mobile' || $view_mode === 'desktop') {
             <div class="col-md-6 col-lg-5 reveal-up delay-2">
                 <a href="page.php?slug=art-works" class="hub-preview-card text-decoration-none d-block shadow-lg rounded-4 overflow-hidden position-relative group">
                     <div class="hub-img-wrap overflow-hidden position-relative">
-                        <?php echo picture('2025/01/untitled-design35.webp', 'الفن التشكيلي', 'img-fluid w-100 hub-zoom', 'loading="lazy"'); ?>
+                        <?php echo picture('2025/01/untitled-design31.png', 'الفن التشكيلي', 'img-fluid w-100 hub-zoom', 'loading="lazy"'); ?>
                         <div class="hub-overlay d-flex flex-column align-items-center justify-content-center">
                             <h3 class="brand-font text-white display-6 fw-bold" style="text-shadow: 2px 2px 8px rgba(0,0,0,0.8); letter-spacing: 1px;">الفن التشكيلي</h3>
                         </div>

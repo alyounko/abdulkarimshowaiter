@@ -954,15 +954,6 @@ footer p {
 .hub-preview-card {
     transition: transform 0.4s ease, box-shadow 0.4s ease;
 }
-.hub-img-wrap {
-    height: 250px;
-    overflow: hidden;
-}
-.hub-img-wrap img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
 
 .hub-preview-card:hover {
     transform: translateY(-10px);
