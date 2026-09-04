@@ -83,6 +83,15 @@ function picture($src, $alt = '', $class = '', $attrs = '') {
         . '<img src="' . htmlspecialchars($src) . '" alt="' . htmlspecialchars($alt) . '"' . $classAttr . ' ' . $attrs . '>'
         . '</picture>';
 }
+
+// Mark covers that are wider than tall (e.g. photographed books) so they are
+// shown fully centered inside the uniform 3/4 frame instead of being cropped.
+function cover_landscape_class($src) {
+    if (!$src || !file_exists($src)) return '';
+    $size = @getimagesize($src);
+    if (!$size || $size[0] <= $size[1]) return '';
+    return ' cover-landscape';
+}
 function fix_content_images($html)
 {
     $html = preg_replace(
@@ -228,6 +237,7 @@ function get_hub_type($slug)
         'privacy-policy' => 'privacy',
         'books' => 'books',
         'dawawin' => 'dawawin',
+        'ai-portraits' => 'ai_portraits',
     ];
     return isset($hubs[$slug]) ? $hubs[$slug] : false;
 }
@@ -317,5 +327,23 @@ function render_literature_hub($pdo)
     </div>
     <?php
     return ob_get_clean();
+}
+
+// Append the current view mode (?view=...) to a link query string
+function view_mode_query($view_mode)
+{
+    return $view_mode ? '&view=' . urlencode($view_mode) : '';
+}
+
+// Emit a viewport meta tag appropriate for the current view mode.
+// In "desktop" view we set the layout viewport to 1140px so media queries
+// evaluate as a desktop screen even when the device is a narrow phone
+// (desktop browsers ignore the viewport meta, so they are unaffected).
+function viewport_meta_tag($view_mode)
+{
+    if ($view_mode === 'desktop') {
+        return '<meta name="viewport" content="width=1140">';
+    }
+    return '<meta name="viewport" content="width=device-width, initial-scale=1.0">';
 }
 ?>

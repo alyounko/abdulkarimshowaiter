@@ -154,7 +154,7 @@ if ($view_mode === 'mobile' || $view_mode === 'desktop') {
 
         <div class="row g-4 justify-content-center">
             <!-- Literature -->
-            <div class="col-md-6 col-lg-5 reveal-up delay-1">
+            <div class="col-md-6 col-lg-4 reveal-up delay-1">
                 <a href="page.php?slug=literature-works" class="hub-preview-card text-decoration-none d-block shadow-lg rounded-4 overflow-hidden position-relative group">
                     <div class="hub-img-wrap overflow-hidden position-relative">
                         <?php echo picture('2025/02/5-1.webp', 'الأدب', 'img-fluid w-100 hub-zoom', 'loading="lazy"'); ?>
@@ -169,7 +169,7 @@ if ($view_mode === 'mobile' || $view_mode === 'desktop') {
                 </a>
             </div>
             <!-- Artworks -->
-            <div class="col-md-6 col-lg-5 reveal-up delay-2">
+            <div class="col-md-6 col-lg-4 reveal-up delay-2">
                 <a href="page.php?slug=art-works" class="hub-preview-card text-decoration-none d-block shadow-lg rounded-4 overflow-hidden position-relative group">
                     <div class="hub-img-wrap overflow-hidden position-relative">
                         <?php echo picture('2025/01/untitled-design31.png', 'الفن التشكيلي', 'img-fluid w-100 hub-zoom', 'loading="lazy"'); ?>
@@ -179,6 +179,21 @@ if ($view_mode === 'mobile' || $view_mode === 'desktop') {
                     </div>
                     <div class="hub-preview-body text-center p-4 bg-white">
                         <p class="text-muted mb-0 fs-5">لوحات فنية تشكيلية من إبداع الطبيب الشاعر الفنان، تعبر عن جماليات الطبيعة والوجدان.</p>
+                        <span class="btn btn-gold rounded-pill mt-3 px-4 py-2 opacity-0 btn-reveal">استكشف <i class="fas fa-arrow-left ms-1"></i></span>
+                    </div>
+                </a>
+            </div>
+            <!-- AI Portraits -->
+            <div class="col-md-6 col-lg-4 reveal-up delay-3">
+                <a href="page.php?slug=ai-portraits" class="hub-preview-card text-decoration-none d-block shadow-lg rounded-4 overflow-hidden position-relative group">
+                    <div class="hub-img-wrap overflow-hidden position-relative">
+                        <?php echo picture('AI-Refind Arts/15.png', 'تحوُّلات فنية بالذكاء الاصطناعي', 'img-fluid w-100 hub-zoom', 'loading="lazy"'); ?>
+                        <div class="hub-overlay d-flex flex-column align-items-center justify-content-center">
+                            <h3 class="brand-font text-white display-6 fw-bold" style="text-shadow: 2px 2px 8px rgba(0,0,0,0.8); letter-spacing: 1px;">تحوُّلات فنية بالذكاء الاصطناعي</h3>
+                        </div>
+                    </div>
+                    <div class="hub-preview-body text-center p-4 bg-white">
+                        <p class="text-muted mb-0 fs-5">بورتريهات مُتقَنة خلّفها لقاء بين فن الدكتور وإمكانيات الذكاء الاصطناعي.</p>
                         <span class="btn btn-gold rounded-pill mt-3 px-4 py-2 opacity-0 btn-reveal">استكشف <i class="fas fa-arrow-left ms-1"></i></span>
                     </div>
                 </a>

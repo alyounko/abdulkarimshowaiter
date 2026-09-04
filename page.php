@@ -1,6 +1,7 @@
 <?php
 ob_start();
 session_start();
+header('Content-Type: text/html; charset=UTF-8');
 /**
  * page.php — Template Dispatcher
  * Resolves the slug, determines the page type, and includes the correct template.
@@ -34,40 +35,51 @@ $hub_templates = [
     'privacy' => 'templates/hubs/privacy.php',
     'books' => 'templates/hubs/books.php',
     'dawawin' => 'templates/hubs/diwans.php',
+    'ai_portraits' => 'templates/hubs/ai_portraits.php',
 ];
 $template = isset($hub_templates[$hub_type]) ? $hub_templates[$hub_type] : 'templates/hubs/standard_page.php';
 
 // Optional extra CSS per template
 $extra_css_map = [
     'interviews' => 'css/interviews.min.css',
-    'art' => 'css/artworks.min.css?v=50',
-    'about' => 'css/about.min.css',
+    'art' => 'css/artworks.min.css?v=51',
+    'about' => 'css/about.min.css?v=2',
     'contact' => 'css/contact.min.css',
     'privacy' => 'css/privacy.min.css',
     'literature' => 'css/literature.min.css',
     'books' => 'css/books.min.css',
     'dawawin' => 'css/diwans.min.css',
+    'ai_portraits' => 'css/artworks.min.css?v=51',
 ];
 $extra_css = isset($extra_css_map[$hub_type]) ? $extra_css_map[$hub_type] : null;
 $load_bookshelf = in_array($hub_type, ['books', 'dawawin']);
 
 // Optional page-specific JS (loaded after main.js via footer)
 $extra_js_map = [
-    'interviews' => '<script src="js/interviews.min.js"></script>',
+    'interviews' => '<script src="js/interviews.min.js?v=2"></script>',
     'art' => '<script src="js/artworks.min.js"></script>',
     'contact' => '<script src="js/contact.min.js"></script>',
     'privacy' => '<script src="js/privacy.min.js"></script>',
     'literature' => '<script src="js/literature.min.js"></script>',
+    'ai_portraits' => '<script src="js/artworks.min.js"></script>',
 ];
 $extra_js = isset($extra_js_map[$hub_type]) ? $extra_js_map[$hub_type] : '';
 $view_mode = isset($_GET['view']) ? $_GET['view'] : null;
+if ($view_mode === 'mobile' || $view_mode === 'desktop') {
+    $_SESSION['view_mode'] = $view_mode;
+} elseif (isset($_GET['view']) && $_GET['view'] === 'natural') {
+    unset($_SESSION['view_mode']);
+    $view_mode = null;
+} elseif ($view_mode === null && isset($_SESSION['view_mode'])) {
+    $view_mode = $_SESSION['view_mode'];
+}
 ?>
 <!DOCTYPE html>
 <html lang="ar" dir="rtl" <?php if ($view_mode === 'mobile') echo 'class="view-mobile"'; elseif ($view_mode === 'desktop') echo 'class="view-desktop"'; ?>>
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <?php echo viewport_meta_tag($view_mode); ?>
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <title><?php echo htmlspecialchars($page_title); ?> - د.عبد الكريم الشويطر</title>
     <meta name="description" content="<?php echo htmlspecialchars($page_title); ?> - موقع الدكتور عبد الكريم الشويطر - طبيب وشاعر وفنان تشكيلي يمني.">
@@ -87,12 +99,12 @@ $view_mode = isset($_GET['view']) ? $_GET['view'] : null;
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Tajawal:wght@400;500;700&display=swap">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.rtl.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="css/style.min.css?v=50">
+    <link rel="stylesheet" href="css/style.min.css?v=52">
     <?php if ($extra_css): ?>
         <link rel="stylesheet" href="<?php echo $extra_css; ?>">
     <?php endif; ?>
     <?php if ($load_bookshelf): ?>
-        <link rel="stylesheet" href="css/bookshelf.min.css">
+        <link rel="stylesheet" href="css/bookshelf.min.css?v=55">
     <?php endif; ?>
 </head>
 
