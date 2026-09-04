@@ -187,7 +187,7 @@ if ($view_mode === 'mobile' || $view_mode === 'desktop') {
             <div class="col-md-6 col-lg-4 reveal-up delay-3">
                 <a href="page.php?slug=ai-portraits" class="hub-preview-card text-decoration-none d-block shadow-lg rounded-4 overflow-hidden position-relative group">
                     <div class="hub-img-wrap overflow-hidden position-relative">
-                        <?php echo picture('AI-Refind Arts/12.png', 'تحوُّلات فنية بالذكاء الاصطناعي', 'img-fluid w-100 hub-zoom', 'loading="lazy"'); ?>
+                        <?php echo picture('AI-Refind Arts/3.png', 'تحوُّلات فنية بالذكاء الاصطناعي', 'img-fluid w-100 hub-zoom', 'loading="lazy"'); ?>
                         <div class="hub-overlay d-flex flex-column align-items-center justify-content-center">
                             <h3 class="brand-font text-white display-6 fw-bold" style="text-shadow: 2px 2px 8px rgba(0,0,0,0.8); letter-spacing: 1px;">تحوُّلات فنية بالذكاء الاصطناعي</h3>
                         </div>
