@@ -10,9 +10,10 @@ require_once 'includes/db.php';
 require_once 'includes/functions.php';
 
 $slug = isset($_GET['slug']) ? trim($_GET['slug']) : null;
+$hub_type = $slug ? get_hub_type($slug) : false;
 $content = $slug ? get_content_by_slug($pdo, $slug) : null;
 
-if (!$content) {
+if (!$content && !$hub_type) {
     header("HTTP/1.0 404 Not Found");
     echo "<h1 style='text-align:center;margin-top:80px;font-family:Amiri,serif;'>عذراً، الصفحة غير موجودة (404)</h1>";
     echo "<p style='text-align:center;'><a href='index.php'>العودة للرئيسية</a></p>";
@@ -20,8 +21,7 @@ if (!$content) {
 }
 
 $menu_pages = get_menu_pages($pdo);
-$hub_type = get_hub_type($slug);
-$page_title = urldecode($content->title);
+$page_title = $content ? urldecode($content->title) : 'تحوُّلات فنية بالذكاء الاصطناعي';
 $current_slug = $slug;
 
 // Map hubs to their templates
